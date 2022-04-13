@@ -28,13 +28,17 @@ class Usuario {
     }
 }
 
+//Se define una nueva clase p1 en base a Usuario
 let p1 = new Usuario("juan", "Sellanes", [{nombre: "a", autor: "b"}] , ["lola"])
+//Se evaluan todos los metodos
 p1.getFullName()
 p1.addMascota("kito")
 p1.countMascotas()
 p1.addBook("Aerodynamics", "VonKarman")
 p1.addBook("Aerodynamics2", "Plotkin")
+//Se prueba la correcta carga de libros
 console.table(p1.libros)
 console.log(p1.libros)
 console.log(p1.libros[1]["nombre"])
+//Se prueba el metodo de obtener los libros
 p1.getBookNames()
