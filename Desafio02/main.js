@@ -1,18 +1,13 @@
 const fs = require('fs')
 
-
-//save(object) :number
-// getById(number): Object
-// getAll(): Object[]
-// deleteById(number): void
-// deleteAll(): void
-
+//Se declara la clase Contenedor
 class contenedor {
     constructor(filename){
         this.filename = filename;
     }
 
     save(obj){
+    //Funcion Save, guarda un nuevo objecto en el archivo
         fs.promises.readFile('./'+ this.filename)
             .then(data =>{
                 //Leer antes de cambiar, tengo que tranformarlos a algo que me sea mas facil modificar
@@ -28,22 +23,27 @@ class contenedor {
                         break;
                     }
                 }
-                //En base a ese for, se evalua si existe ya el nombre de item
                 console.log(found)
-                
+
                 if(found == false){             //Item no existe
-                    obj.id = contenidoViejo.length + 1
-                    //Check ID
-                    for (var i = 0; i <contenidoViejo.length; i++){
-                        if(contenidoViejo[i].id == obj.id){
-                            obj.id = obj.id + 1;
-                            break;
-                        }
+                    
+                    obj.id = contenidoViejo.length + 1 //Se pone un ID provisorio
+                    //Se busca el numero de ID maximo
+                    let IdsArray = contenidoViejo.map(productos => productos.id)
+                    console.log(IdsArray)
+                    let maxID = Math.max(...IdsArray)
+                    console.log(maxID)
+                    //Check ID si esta repetido y corrige si es necesario, en caso de borrar varios productos
+                    //Se pueden solapar los IDs, entonces se elige el IDmaximo + 1 como ID nuevo de ser necesario
+                    if(maxID >= obj.id){
+                        obj.id = maxID + 1;
                     }
+
                     contenidoViejo.push( obj )
                     let contenidoNuevo = contenidoViejo
                     console.log(`Contenido Nuevo: ${contenidoNuevo}`)
                     console.log("Product ID = " + obj.id)
+                    // Se guarda el File
                     return fs.promises.writeFile('./'+ this.filename , JSON.stringify(contenidoNuevo, null, 2))
 
                 } else if(found == true) {      //Item Repetido
@@ -57,6 +57,7 @@ class contenedor {
     }
 
     getById(idNumber){
+    //Trae el item segun su ID unico
         fs.promises.readFile('./'+ this.filename)
         .then(data =>{
             const contenidoParseado = JSON.parse(data);
@@ -113,5 +114,5 @@ let newContenedor = new contenedor("productos.json")
 //newContenedor.getById(234324)
 //newContenedor.getAll()
 //newContenedor.deleteById(2)
-//newContenedor.save({"title": "cutter", "price": 475})
-//newContenedor.deleteAll()  ////CUIDADO BORRA TODO
+//newContenedor.deleteById(1)
+//newContenedor.deleteAll()  ////CUIDADO BORRA EL PRODUCTOS.JSON  ////
