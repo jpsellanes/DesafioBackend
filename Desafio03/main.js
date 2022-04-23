@@ -73,16 +73,26 @@ module.exports = class contenedor {
         })
     }
 
-    getAll(){
-        fs.promises.readFile('./'+ this.filename)
-        .then(data =>{
+    async getByIdRandom(){
+        try{
+            let data = await fs.promises.readFile('./'+ this.filename)
+            const contenidoParseado = JSON.parse(data);
+            let productoRand = contenidoParseado[Math.floor(Math.random()*contenidoParseado.length)]
+            return productoRand
+        } catch(err){
+                console.log("ERROR with GetByIdRandom-> " + err)
+            }
+        }
+
+    async getAll(){
+        try{
+            let data = await fs.promises.readFile('./'+ this.filename)
             const contParsed = JSON.parse(data);
             //console.log(contParsed)
             return contParsed
-        })
-        .catch(err=>{
+        } catch(err){
             console.log("ERROR -> " + err)
-        })
+        }
     }
 
     deleteById(idNumber){

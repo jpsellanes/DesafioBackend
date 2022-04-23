@@ -25,17 +25,10 @@ app.get('/fyh', (req, res)=>{
     res.send({fechaYhora: new Date().toLocaleString()})
 })
 
-//app.use(contenedor.getAll())
-
 app.get('/productos', async(req, res)=>{
-    //res.send("PRODUCTOS")  
-    //Newcontenedor.getAll()
-    //JSON.stringify(Newcontenedor.getAll())
-    //Newcontenedor.getAll()
-    //console.log(Newcontenedor.getAll())
-    res.send(await Newcontenedor.getAll() )
+    res.send(await Newcontenedor.getAll())
 })
 
-app.get('/productoRandom', (req, res)=>{
-    res.send("PRODUCTOS RANDOM")
+app.get('/productoRandom', async(req, res)=>{
+    res.send(await Newcontenedor.getByIdRandom())
 })
