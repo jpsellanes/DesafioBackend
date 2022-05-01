@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Escuadra",
+    "price": 350,
+    "id": 1
+  },
+  {
+    "title": "calculadora",
+    "price": 1800,
+    "id": 2
+  },
+  {
+    "title": "globo_terraqueo",
+    "price": 2550,
+    "id": 3
+  },
+  {
+    "title": "lapicera",
+    "price": 250,
+    "id": 4
+  },
+  {
+    "title": "lapicera2",
+    "price": 220,
+    "id": 5
+  },
+  {
+    "title": "lapicera4",
+    "price": 220,
+    "id": 6
+  },
+  {
+    "title": "biromeX",
+    "price": 175,
+    "id": 7
+  },
+  {
+    "title": "tttasdasdas",
+    "price": 175,
+    "id": 8
+  }
+]

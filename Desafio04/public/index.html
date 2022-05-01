@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios de Productos</title>
+</head>
+<body>
+
+    <h2>Ingrese Producto</h2>
+    <form action="/productos" method="POST">
+        Nombre: <input type="text" name="title">
+        Precio: <input type="number" name="price">
+        <button>Enviar</button>
+        <button type="submit" formmethod="GET">Mostrar Todos Productos</button>
+    </form>
+    <h2>Ingrese ID</h2>
+    <form > 
+        ID: <input type="number" name="id" id="formElementID">
+        <button  class="getByID">Mostrar Por ID</button>
+        <button  class="deleteById" >Eliminar por ID</button>
+    </form>
+
+    <script>
+        //action="/productos/:id"
+        const btnEliminar = document.querySelector('button.deleteById')
+        btnEliminar.addEventListener("click", ()=>{
+            let productoID = document.querySelector('#formElementID').value
+            console.log("EL IDE DEL PRODUCTO ES " + productoID)
+            fetch('/productos/:id', {
+                method: 'delete',
+                body:new URLSearchParams({"productoID" : productoID}),
+                headers: { 
+                    "Accept": "application/json",
+                    "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.json())
+            .catch(err => console.log("error en fetch" + err))
+        })
+        const btnGetByID = document.querySelector('button.getByID')
+        btnGetByID.addEventListener("click", ()=>{
+            let productoID = document.querySelector('#formElementID').value
+            console.log("El get by ID es" + productoID)
+            fetch('/productos/:id', {
+                method: 'post',
+                body:new URLSearchParams({"productoID" : productoID}),
+                headers: { 
+                    "Accept": "application/json",
+                    "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.json())
+            .catch(err => console.log("error en fetch" + err))
+        })
+
+    </script>
+</body>
+</html>
