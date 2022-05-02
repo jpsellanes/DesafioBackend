@@ -15,11 +15,11 @@
         <button type="submit" formmethod="GET">Mostrar Todos Productos</button>
     </form>
     <h2>Ingrese ID</h2>
-    <form > 
+    <form action="/productos/:id" method="GET"> 
         ID: <input type="number" name="id" id="formElementID">
-        <button  class="getByID">Mostrar Por ID</button>
-        <button  class="deleteById" >Eliminar por ID</button>
     </form>
+    <button  class="deleteById" >Eliminar por ID</button>
+    <button  type="submit" class="getByID">Mostrar Por ID</button>
 
     <script>
         //action="/productos/:id"
@@ -42,14 +42,14 @@
             let productoID = document.querySelector('#formElementID').value
             console.log("El get by ID es" + productoID)
             fetch('/productos/:id', {
-                method: 'post',
+                method: 'get',
                 body:new URLSearchParams({"productoID" : productoID}),
                 headers: { 
                     "Accept": "application/json",
                     "Content-Type": "application/x-www-form-urlencoded" }
             })
             .then(res => res.json())
-            .catch(err => console.log("error en fetch" + err))
+            .catch(err => console.log("error en fetch " + err))
         })
 
     </script>

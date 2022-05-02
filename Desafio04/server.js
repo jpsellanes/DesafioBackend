@@ -22,8 +22,10 @@ routerProductos.post('/productos', async(req, res)=>{
 })
 
 const routerProductosID = new Router()
-routerProductosID.post("/productos/:id", async(req, res)=>{
-    console.log("POST BUTTON id: " + parseInt(req.body.productoID))
+routerProductosID.get("/productos/:id", async(req, res)=>{
+    console.log("POST BUTTON id typeof: " + typeof(req.body))
+    console.log(req.body.productoID)
+    console.log(req.body.id)
     await Newcontenedor.getById(parseInt(req.body.productoID))
     res.send(await Newcontenedor.getById(parseInt(req.body.productoID)))
 })
@@ -51,6 +53,6 @@ app.use("/", routerProductosID)
 //Levantar Server
 const PORT = 8080
 const server = app.listen(PORT, ()=>{
-    console.log("servidor escuchando ${server.address().port}")
+    console.log(`servidor escuchando ${server.address().port}`)
 })
 server.on("error", error => console.log("error" + error))
