@@ -15,14 +15,15 @@
         <button type="submit" formmethod="GET">Mostrar Todos Productos</button>
     </form>
     <h2>Ingrese ID</h2>
-    <form action="/productos/:id" method="GET"> 
+    <form action="/productos/id" method="GET"> 
         ID: <input type="number" name="id" id="formElementID">
+        <button  type="submit" class="getByID">Mostrar Por ID</button>
     </form>
     <button  class="deleteById" >Eliminar por ID</button>
-    <button  type="submit" class="getByID">Mostrar Por ID</button>
+    
 
     <script>
-        //action="/productos/:id"
+        //action="/productos/:id" method="GET"
         const btnEliminar = document.querySelector('button.deleteById')
         btnEliminar.addEventListener("click", ()=>{
             let productoID = document.querySelector('#formElementID').value
@@ -37,12 +38,26 @@
             .then(res => res.json())
             .catch(err => console.log("error en fetch" + err))
         })
+
+
+        /*
         const btnGetByID = document.querySelector('button.getByID')
         btnGetByID.addEventListener("click", ()=>{
             let productoID = document.querySelector('#formElementID').value
             console.log("El get by ID es" + productoID)
-            fetch('/productos/:id', {
-                method: 'get',
+            fetch(`/productos/:${productoID}`, {method: 'get'})
+            .then(res => res.json())
+            .catch(err => console.log("error en fetch " + err))
+        })*/
+
+
+
+        /* const btnGetByID = document.querySelector('button.getByID')
+        btnGetByID.addEventListener("click", ()=>{
+            let productoID = document.querySelector('#formElementID').value
+            console.log("El get by ID es" + productoID)
+            fetch(`/productos/:`, {
+                method: 'post',
                 body:new URLSearchParams({"productoID" : productoID}),
                 headers: { 
                     "Accept": "application/json",
@@ -50,7 +65,7 @@
             })
             .then(res => res.json())
             .catch(err => console.log("error en fetch " + err))
-        })
+        })*/
 
     </script>
 </body>

@@ -22,29 +22,29 @@ routerProductos.post('/productos', async(req, res)=>{
 })
 
 const routerProductosID = new Router()
-routerProductosID.get("/productos/:id", async(req, res)=>{
-    console.log("POST BUTTON id typeof: " + typeof(req.body))
-    console.log(req.body.productoID)
-    console.log(req.body.id)
-    await Newcontenedor.getById(parseInt(req.body.productoID))
-    res.send(await Newcontenedor.getById(parseInt(req.body.productoID)))
+routerProductosID.get("/productos/id", async(req, res)=>{
+    console.log(req.query.id)
+    await Newcontenedor.getById(parseInt(req.query.id))
+    res.send(await Newcontenedor.getById(parseInt(req.query.id)))
 })
+
 routerProductosID.put("/productos/:id", async(req, res)=>{
     res.send("PUT await Newcontenedor.getById(id)")
 })
 routerProductosID.delete("/productos/:id", async(req, res)=>{
     console.log("delete button pressed id " + parseInt(req.body.productoID))
-    //await Newcontenedor.deleteById(parseInt(req.body.productoID))
-    //res.send(await Newcontenedor.getAll())
+    console.log("id borrar: " + req.body.productoID)
+    await Newcontenedor.deleteById(req.body.productoID)
 })
 
 /*
 ------GET '/api/productos' -> devuelve todos los productos.------
-GET '/api/productos/:id' -> devuelve un producto según su id.
+------GET '/api/productos/:id' -> devuelve un producto según su id.
 ------POST '/api/productos' -> recibe y agrega un producto, y lo devuelve con su id asignado.
 PUT '/api/productos/:id' -> recibe y actualiza un producto según su id.
-DELETE '/api/productos/:id' -> elimina un producto según su id
+------DELETE '/api/productos/:id' -> elimina un producto según su id
 */
+
 
 // Carga de router
 app.use("/", routerProductos)

@@ -60,8 +60,8 @@ module.exports = class contenedor {
         try{
             let data = await fs.promises.readFile('./'+ this.filename)
             const contenidoParseado = JSON.parse(data);
-            let prodPorId = contenidoParseado.find(productos => productos.id === idNumber);
-            if(prodPorId !== undefined){
+            let prodPorId = contenidoParseado.find(productos => productos.id == idNumber);
+            if(prodPorId != undefined){
                 console.log(prodPorId)
                 return prodPorId
             } else {
@@ -99,9 +99,9 @@ module.exports = class contenedor {
         try{
             let data = await fs.promises.readFile('./'+ this.filename)
             const contParsed = JSON.parse(data);
-            let prodPorId = contParsed.find(productos => productos.id === idNumber);
-            if(prodPorId !== undefined){
-                let prodListIndex = contParsed.findIndex(productos => productos.id === idNumber)
+            let prodPorId = contParsed.find(productos => productos.id == idNumber);
+            if(prodPorId != undefined){
+                let prodListIndex = contParsed.findIndex(productos => productos.id == idNumber)
                 contParsed.splice(prodListIndex,1)
                 console.log(contParsed) //Guardar el archivo
                 await fs.promises.writeFile('./'+ this.filename, JSON.stringify(contParsed, null, 2)) //ojo este await
