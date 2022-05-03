@@ -28,8 +28,12 @@ routerProductosID.get("/productos/id", async(req, res)=>{
     res.send(await Newcontenedor.getById(parseInt(req.query.id)))
 })
 
-routerProductosID.put("/productos/:id", async(req, res)=>{
-    res.send("PUT await Newcontenedor.getById(id)")
+routerProductosID.put("/productos/id", async(req, res)=>{
+    let productId = req.body.productoID
+    console.log(productId + "Cuyo typeof es: " + typeof(productId))
+    console.log(req.body.productoTitle)
+    await Newcontenedor.updateById(productId, req.body)
+    console.log("PUT await Newcontenedor.getById(id)")
 })
 routerProductosID.delete("/productos/id", async(req, res)=>{
     console.log("delete button pressed id " + parseInt(req.body.productoID))
@@ -41,7 +45,7 @@ routerProductosID.delete("/productos/id", async(req, res)=>{
 ------GET '/api/productos' -> devuelve todos los productos.------
 ------GET '/api/productos/:id' -> devuelve un producto según su id.
 ------POST '/api/productos' -> recibe y agrega un producto, y lo devuelve con su id asignado.
-PUT '/api/productos/:id' -> recibe y actualiza un producto según su id.
+------PUT '/api/productos/:id' -> recibe y actualiza un producto según su id.
 ------DELETE '/api/productos/:id' -> elimina un producto según su id
 */
 

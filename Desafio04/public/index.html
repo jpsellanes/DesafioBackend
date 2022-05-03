@@ -20,8 +20,11 @@
         <button  type="submit" class="getByID">Mostrar Por ID</button>
         Producto: <input type="text" name="title" id="formElementTitle">
         Precio: <input type="number" name="price" id="formElementPrice">
+        <button type="submit" class="putByID" >Actualizar Producto</button>
+        <br>
         <button  class="deleteById" >Eliminar por ID</button>
     </form>
+
     
     
 
@@ -43,6 +46,25 @@
             .catch(err => console.log("error en fetch" + err))
         })
 
+        const putByID = document.querySelector('button.putByID')
+        putByID.addEventListener("click", ()=>{
+            let productoID = document.querySelector('#formElementID').value
+            let productTitle = document.querySelector('#formElementTitle').value
+            let productPrice = document.querySelector('#formElementPrice').value
+            console.log("Comando PUT :" + productoID)
+            fetch('/productos/id', {
+                method: 'put',
+                body:new URLSearchParams({
+                    "productoID" : productoID,
+                    "productoTitle" : productTitle,
+                    "productoPrice" : productPrice  }),
+                headers: { 
+                    "Accept": "application/json",
+                    "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.text())
+            .catch(err => console.log("error en fetch" + err))
+        })
 
         /*
         const btnGetByID = document.querySelector('button.getByID')

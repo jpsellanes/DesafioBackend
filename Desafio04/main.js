@@ -38,7 +38,6 @@ module.exports = class contenedor {
                 if(maxID >= obj.id){
                     obj.id = maxID + 1;
                 }
-
                 contenidoViejo.push( obj )
                 let contenidoNuevo = contenidoViejo
                 console.log(`Contenido Nuevo: ${contenidoNuevo}`)
@@ -52,6 +51,26 @@ module.exports = class contenedor {
         }
         catch(err){
             console.log("ERROR with Save ->" + err)
+        }
+    }
+
+    async updateById(idNumber, newData){
+        try{
+            let data = await fs.promises.readFile('./'+ this.filename)
+            const contenidoParseado = JSON.parse(data);
+            let prodIndex = contenidoParseado.findIndex(productos => productos.id == idNumber);
+            if(prodIndex != undefined){
+                console.log("nueva data pa update " + newData + "el index sera" + prodIndex)
+                contenidoParseado[prodIndex].title = newData.productoTitle
+                contenidoParseado[prodIndex].price = newData.productoPrice
+                console.log("El producto actualizado se debe ver asi " + contenidoParseado[prodIndex])
+                return await fs.promises.writeFile('./'+ this.filename , JSON.stringify(contenidoParseado, null, 2))
+            } else {
+                console.log("Product Not Found for Update!")
+                return "Producto No Encontrado para Update"
+            }
+        }catch(err){
+            console.log("Error with UpdateByID " + err)
         }
     }
 
