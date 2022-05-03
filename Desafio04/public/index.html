@@ -29,8 +29,6 @@
     
 
     <script>
-        //<button  class="deleteById" >Eliminar por ID</button>
-        //action="/productos/:id" method="GET"
         const btnEliminar = document.querySelector('button.deleteById')
         btnEliminar.addEventListener("click", ()=>{
             let productoID = document.querySelector('#formElementID').value
@@ -65,34 +63,6 @@
             .then(res => res.text())
             .catch(err => console.log("error en fetch" + err))
         })
-
-        /*
-        const btnGetByID = document.querySelector('button.getByID')
-        btnGetByID.addEventListener("click", ()=>{
-            let productoID = document.querySelector('#formElementID').value
-            console.log("El get by ID es" + productoID)
-            fetch(`/productos/:${productoID}`, {method: 'get'})
-            .then(res => res.json())
-            .catch(err => console.log("error en fetch " + err))
-        })*/
-
-
-
-        /* const btnGetByID = document.querySelector('button.getByID')
-        btnGetByID.addEventListener("click", ()=>{
-            let productoID = document.querySelector('#formElementID').value
-            console.log("El get by ID es" + productoID)
-            fetch(`/productos/:`, {
-                method: 'post',
-                body:new URLSearchParams({"productoID" : productoID}),
-                headers: { 
-                    "Accept": "application/json",
-                    "Content-Type": "application/x-www-form-urlencoded" }
-            })
-            .then(res => res.json())
-            .catch(err => console.log("error en fetch " + err))
-        })*/
-
     </script>
 </body>
 </html>
