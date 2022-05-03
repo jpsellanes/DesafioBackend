@@ -18,17 +18,21 @@
     <form action="/productos/id" method="GET"> 
         ID: <input type="number" name="id" id="formElementID">
         <button  type="submit" class="getByID">Mostrar Por ID</button>
+        Producto: <input type="text" name="title" id="formElementTitle">
+        Precio: <input type="number" name="price" id="formElementPrice">
+        <button  class="deleteById" >Eliminar por ID</button>
     </form>
-    <button  class="deleteById" >Eliminar por ID</button>
+    
     
 
     <script>
+        //<button  class="deleteById" >Eliminar por ID</button>
         //action="/productos/:id" method="GET"
         const btnEliminar = document.querySelector('button.deleteById')
         btnEliminar.addEventListener("click", ()=>{
             let productoID = document.querySelector('#formElementID').value
             console.log("EL IDE DEL PRODUCTO ES " + productoID)
-            fetch('/productos/:id', {
+            fetch('/productos/id', {
                 method: 'delete',
                 body:new URLSearchParams({"productoID" : productoID}),
                 headers: { 

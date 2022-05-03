@@ -23,7 +23,7 @@ routerProductos.post('/productos', async(req, res)=>{
 
 const routerProductosID = new Router()
 routerProductosID.get("/productos/id", async(req, res)=>{
-    console.log(req.query.id)
+    console.log("Get Product ID " + req.query.id)
     await Newcontenedor.getById(parseInt(req.query.id))
     res.send(await Newcontenedor.getById(parseInt(req.query.id)))
 })
@@ -31,7 +31,7 @@ routerProductosID.get("/productos/id", async(req, res)=>{
 routerProductosID.put("/productos/:id", async(req, res)=>{
     res.send("PUT await Newcontenedor.getById(id)")
 })
-routerProductosID.delete("/productos/:id", async(req, res)=>{
+routerProductosID.delete("/productos/id", async(req, res)=>{
     console.log("delete button pressed id " + parseInt(req.body.productoID))
     console.log("id borrar: " + req.body.productoID)
     await Newcontenedor.deleteById(req.body.productoID)
