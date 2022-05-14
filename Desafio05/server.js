@@ -23,6 +23,9 @@ routerProductos.post('/productos', async(req, res)=>{
     productos.push(req.body)
     res.redirect('/')
 })
+routerProductos.get('/productos', async(req, res)=>{
+    res.render('productos', {productos})
+})
 
 
 // Carga de router
