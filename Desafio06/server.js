@@ -53,10 +53,10 @@ io.on('connection', async(socket)=>{
     const productos = await Newcontenedor.getAll()
     socket.emit("productos",productos)
         socket.on("new-product", async()=>{
-            productos = await Newcontenedor.getAll()
+            //productos = await Newcontenedor.getAll()
             socket.emit("productos", productos)
             io.sockets.emit("productos", productos)
-            console.log("ANDUVIO EL EMIT DE PRODUCTOS")
+            console.log("aca estaria andnado el new-product")
         })
 })
 
