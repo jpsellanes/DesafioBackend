@@ -12,10 +12,10 @@ module.exports = class contenedor {
             let data = await fs.promises.readFile('./'+ this.filename)
             //Leer antes de cambiar, tengo que tranformarlos a algo que me sea mas facil modificar
             const contenidoViejo = JSON.parse(data)
-            console.log(`Contenido Viejo: ${contenidoViejo}`)
+            //console.log(`Contenido Viejo: ${contenidoViejo}`)
             //Ahora se tienen disponibles los datos para modificar
             //Se evalua si hay duplicado
-            console.log(obj.title)
+            //console.log(obj.title)
             let found = false;
             for(var i = 0; i< contenidoViejo.length; i++){
                 if(contenidoViejo[i].title == obj.title){
@@ -23,16 +23,16 @@ module.exports = class contenedor {
                     break;
                 }
             }
-            console.log(found)
+            //console.log(found)
 
             if(found == false){             //Item no existe
                 
                 obj.id = contenidoViejo.length + 1 //Se pone un ID provisorio
                 //Se busca el numero de ID maximo
                 let IdsArray = contenidoViejo.map(productos => productos.id)
-                console.log(IdsArray)
+                //console.log(IdsArray)
                 let maxID = Math.max(...IdsArray)
-                console.log(maxID)
+                //console.log(maxID)
                 //Check ID si esta repetido y corrige si es necesario, en caso de borrar varios productos
                 //Se pueden solapar los IDs, entonces se elige el IDmaximo + 1 como ID nuevo de ser necesario
                 if(maxID >= obj.id){
@@ -40,8 +40,8 @@ module.exports = class contenedor {
                 }
                 contenidoViejo.push( obj )
                 let contenidoNuevo = contenidoViejo
-                console.log(`Contenido Nuevo: ${contenidoNuevo}`)
-                console.log("Product ID = " + obj.id)
+                //console.log(`Contenido Nuevo: ${contenidoNuevo}`)
+                //console.log("Product ID = " + obj.id)
                 // Se guarda el File
                 return await fs.promises.writeFile('./'+ this.filename , JSON.stringify(contenidoNuevo, null, 2))
 

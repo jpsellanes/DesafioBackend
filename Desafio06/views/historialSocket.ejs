@@ -6,13 +6,13 @@
     <div class="table-responsive">
         <table class="table table-dark">
             <tr style="color: yellow;"> <th>Title</th> <th>Price</th> <th>Thumbnail</th> </tr>
-            <% for (const producto of productos) {%>
+            <!--<% for (const producto of productos) {%>-->
             <tr id="listaProductos">
                 <!--<td><%=producto.title%></td>
                 <td><%=producto.price%></td>
                 <td><%=producto.thumbnail%></td>-->
             </tr>
-            <%};%>
+            <!--<%};%>-->
         </table>
     </div>
 <% } else{ %>
@@ -21,7 +21,14 @@
 
 <script>
     const socketHistorial = io()
-        socketHistorial.on("productos", (productos)=>{
+    const botonEnviarForm01 = document.getElementById("botonEnviarForm01")
+    botonEnviarForm01.addEventListener("click", function(){
+        socket.emit("new-product", productos);
+        console.log("productosUpdateARRANCO")
+        
+    })
+    
+    function showProductList(productos){
             console.log(productos)
                 const html = productos.map((elem, index)=>{
                 return(`
@@ -32,17 +39,10 @@
                 </div>
                 `)
                 })
-                document.getElementById("listaProductos").innerHTML = html
-        })
-
-        function productosUpdate(e){
-            
-        }
-        /*function addMessage(e){
-            const message = {}
-            socket.emit("new-message", message);
-            return false
-        }*/
-        //Recibir
-        //socketHistorial.on("listaProductos", function(data){ render(data)})
+                document.getElementById("listaProductos").innerHTML = html   
+    }
+        
+    socketHistorial.on("productos", (productos)=>{
+            console.log(productos)
+            showProductList(productos)})
 </script>

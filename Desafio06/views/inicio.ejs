@@ -28,7 +28,7 @@
     </div>
     
     <script>
-        const socket = io()
+        const socket = io.connect()
         function nuevaHora(){
             const today = new Date()
             let todayTime = today.getFullYear() +"-"+ today.getMonth() +"-"+ today.getDate() +"-"+ today.getHours()+"-"+today.getMinutes()+"-"+today.getSeconds()
@@ -59,10 +59,9 @@
             console.log(nuevaHora())
             document.getElementById("messages").innerHTML = html
         }
-        
+
         socket.on("messages", function(data){ render(data)})
     </script>
-    <!--<script src="scriptInicio.js"></script>-->
 </body>
 
 </html>
