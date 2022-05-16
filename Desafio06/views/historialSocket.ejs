@@ -20,10 +20,13 @@
 <% } %>
 
 <script>
-    const socketHistorial = io()
+    const socketHistorial = io.connect()
     const botonEnviarForm01 = document.getElementById("botonEnviarForm01")
     botonEnviarForm01.addEventListener("click", function(){
-        socketHistorial.emit("new-product",productos);
+        socketHistorial.on("productos", (productos)=>{
+            productos=productos
+        })
+        socketHistorial.emit("new-product", productos)
         console.log("productosUpdateARRANCO")
         
     })

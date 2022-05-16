@@ -34,10 +34,12 @@ routerProductos.get('/', async(req, res)=>{
 
 routerProductos.post('/productos', async(req, res)=>{
     await Newcontenedor.save(req.body)
+    productos = await Newcontenedor.getAll()
     productos.push(req.body)
-    res.redirect('/')
+    //res.redirect('/')
 })
 routerProductos.get('/productos', async(req, res)=>{
+    productos = await Newcontenedor.getAll()
     res.render('productos', {productos})
 })
 
@@ -53,7 +55,7 @@ io.on('connection', async(socket)=>{
     const productos = await Newcontenedor.getAll()
     socket.emit("productos",productos)
         socket.on("new-product", async()=>{
-            //productos = await Newcontenedor.getAll()
+            productos = await Newcontenedor.getAll()
             socket.emit("productos", productos)
             io.sockets.emit("productos", productos)
             console.log("aca estaria andnado el new-product")
