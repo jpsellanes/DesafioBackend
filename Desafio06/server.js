@@ -24,7 +24,10 @@ const routerProductos = new Router()
 routerProductos.get('/', async(req, res)=>{
     productos = await Newcontenedor.getAll()
     res.render('inicio', {productos})
+    io.on('connection', (socket)=>{
+        socket.emit("productos",productos)})
 })
+
 routerProductos.post('/productos', async(req, res)=>{
     await Newcontenedor.save(req.body)
     productos.push(req.body)
@@ -37,7 +40,6 @@ routerProductos.get('/productos', async(req, res)=>{
 //io socket on
 io.on('connection', (socket)=>{
     console.log("user connected " + socket.id)
-    console.log('un cliente se ha conectado!')
     socket.emit('messages', messages)
     socket.on('new-message', data =>{
         messages.push(data)

@@ -54,23 +54,5 @@
     "price": "50",
     "thumbnail": "imagenPNG",
     "id": 11
-  },
-  {
-    "title": "productoPrueba01",
-    "price": "222",
-    "thumbnail": "aaaa222",
-    "id": 12
-  },
-  {
-    "title": "",
-    "price": "",
-    "thumbnail": "",
-    "id": 13
-  },
-  {
-    "title": "NuevoPrdocuto",
-    "price": "123",
-    "thumbnail": "123",
-    "id": 14
   }
 ]

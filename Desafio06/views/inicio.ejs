@@ -59,7 +59,7 @@
             console.log(nuevaHora())
             document.getElementById("messages").innerHTML = html
         }
-
+        
         socket.on("messages", function(data){ render(data)})
     </script>
     <!--<script src="scriptInicio.js"></script>-->
