@@ -10,9 +10,7 @@ const app = express()
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
 
-const messages = [
-    {autor: "juan", mensaje: "Que ondaaaa"}
-]
+const messages = []
 
 //APP
 app.use(express.static("public"))

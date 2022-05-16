@@ -14,7 +14,7 @@
     <div class="container mt-3">
         <div class="jumbotron">
             <%- include('./formulario')-%>
-            <%- include('./historial')-%>
+            <%- include('./historialSocket')-%>
         </div>
         <h1>CHAT</h1>
         <div>
@@ -29,10 +29,18 @@
     
     <script>
         const socket = io()
+        function nuevaHora(){
+            const today = new Date()
+            let todayTime = today.getFullYear() +"-"+ today.getMonth() +"-"+ today.getDate() +"-"+ today.getHours()+"-"+today.getMinutes()+"-"+today.getSeconds()
+            return todayTime
+        }
+        horaDelMensaje="";
         function addMessage(e){
+            horaDelMensaje = nuevaHora()
             const message = {
                 author: document.getElementById('username').value,
-                message: document.getElementById('text').value,
+                message: document.getElementById('text').value, 
+                horaMensaje: nuevaHora()
             }
             socket.emit("new-message", message);
             return false
@@ -42,10 +50,13 @@
             const html = data.map((elem, index)=>{
                 return(`
                 <div>
-                    <strong>${elem.author}</strong>
-                    <strong>${elem.message}</strong>
+                    <strong style="color:blue">${elem.author}</strong>>
+                    <p style="color:brown">${elem.horaMensaje}</p>
+                    <p style="font-style:italic; color:green">${elem.message}</p>
+                    <hr>
                 </div>`)
             }).join(" ")
+            console.log(nuevaHora())
             document.getElementById("messages").innerHTML = html
         }
 
