@@ -24,9 +24,9 @@
     const botonEnviarForm01 = document.getElementById("botonEnviarForm01")
     botonEnviarForm01.addEventListener("click", function(){
         socketHistorial.on("productos", (productos)=>{
-            productos=productos
+            let productosNuevos = productos
+            socketHistorial.emit("new-product", productosNuevos)
         })
-        socketHistorial.emit("new-product", productos)
         console.log("productosUpdateARRANCO")
         
     })
