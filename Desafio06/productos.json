@@ -54,5 +54,41 @@
     "price": "50",
     "thumbnail": "imagenPNG",
     "id": 11
+  },
+  {
+    "title": "ReglaMapedV02",
+    "price": "300",
+    "thumbnail": "",
+    "id": 12
+  },
+  {
+    "title": "PegamentoLaGotita",
+    "price": "750",
+    "thumbnail": "",
+    "id": 13
+  },
+  {
+    "title": "SuperPegamentoWurth",
+    "price": "1250",
+    "thumbnail": "",
+    "id": 14
+  },
+  {
+    "title": "11111111",
+    "price": "55555",
+    "thumbnail": "",
+    "id": 15
+  },
+  {
+    "title": "probandoLoop",
+    "price": "1234",
+    "thumbnail": "",
+    "id": 16
+  },
+  {
+    "title": "probandoLoop2",
+    "price": "",
+    "thumbnail": "",
+    "id": 17
   }
 ]

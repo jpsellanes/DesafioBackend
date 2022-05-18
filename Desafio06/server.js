@@ -3,8 +3,9 @@ const {Router} = express
 const {Server:HttpServer} = require("http")
 const {Server:IOServer} = require("socket.io")
 const contenedor = require('./main.js')
+const messageContenedor = require('./mainMessages.js')
 
-
+const NewmsgContenedor = new messageContenedor('mensajes.json')
 const Newcontenedor = new contenedor('productos.json')
 const app = express()
 const httpServer = new HttpServer(app)
@@ -24,12 +25,6 @@ const routerProductos = new Router()
 routerProductos.get('/', async(req, res)=>{
     productos = await Newcontenedor.getAll()
     res.render('inicio', {productos})
-    /*io.on('connection', (socket)=>{
-        socket.emit("productos",productos)
-        socket.on("new-product", productos=>{
-            io.sockets.emit("productos", productos)
-        })
-    })*/
 })
 
 routerProductos.post('/productos', async(req, res)=>{
@@ -49,17 +44,19 @@ io.on('connection', async(socket)=>{
     socket.emit('messages', messages)
     socket.on('new-message', data =>{
         messages.push(data)
+        console.log(typeof(data))
         io.sockets.emit('messages', messages)
         console.log("aca estaria andnado el chat")
+        NewmsgContenedor.save(data)
     })
     const productos = await Newcontenedor.getAll()
     socket.emit("productos", productos)
-        socket.on("new-product", async()=>{
-            let productosNuevos = await Newcontenedor.getAll()
-            socket.emit("productos", productosNuevos)
-            io.sockets.emit("productos", productosNuevos)
-            console.log("aca estaria andando el new-product")
-        })
+    socket.on("new-product", productosNuevos =>{
+        //let productosNuevos =  await Newcontenedor.getAll()
+        socket.emit("productos", productosNuevos)
+        io.sockets.emit("productos", productosNuevos)
+        console.log("aca estaria andando el new-product")
+    })
 })
 
 // Carga de router

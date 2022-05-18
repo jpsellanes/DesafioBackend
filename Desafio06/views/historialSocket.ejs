@@ -26,9 +26,7 @@
         socketHistorial.on("productos", (productos)=>{
             let productosNuevos = productos
             socketHistorial.emit("new-product", productosNuevos)
-        })
-        console.log("productosUpdateARRANCO")
-        
+        })    
     })
     
     function showProductList(productos){
