@@ -10,38 +10,29 @@ module.exports = class cartContenedor {
     //Funcion Save, guarda un nuevo objecto en el archivo
         try{
             let data = await fs.promises.readFile('./'+ this.filename)
-            //Leer antes de cambiar, tengo que tranformarlos a algo que me sea mas facil modificar
             const contenidoViejo = JSON.parse(data)
-            console.log(`Contenido Viejo: ${contenidoViejo}`)
-            //Ahora se tienen disponibles los datos para modificar
             //Se evalua si hay duplicado
-            console.log(obj.title)
             let found = false;
             for(var i = 0; i< contenidoViejo.length; i++){
-                if(contenidoViejo[i].title == obj.title){
+                if(contenidoViejo[i].cartID == obj.title){
                     found = true
                     break;
                 }
             }
-            console.log(found)
-
-            if(found == false){             //Item no existe
-                
-                obj.id = contenidoViejo.length + 1 //Se pone un ID provisorio
+            if(found == false){//Item no existe
+                obj.cartID = contenidoViejo.length + 1 //Se pone un ID provisorio
                 //Se busca el numero de ID maximo
-                let IdsArray = contenidoViejo.map(productos => productos.id)
-                console.log(IdsArray)
+                let IdsArray = contenidoViejo.map(a => a.id)
                 let maxID = Math.max(...IdsArray)
-                console.log(maxID)
                 //Check ID si esta repetido y corrige si es necesario, en caso de borrar varios productos
                 //Se pueden solapar los IDs, entonces se elige el IDmaximo + 1 como ID nuevo de ser necesario
-                if(maxID >= obj.id){
-                    obj.id = maxID + 1;
+                if(maxID >= obj.cartID){
+                    obj.cartID = maxID + 1;
                 }
                 contenidoViejo.push( obj )
                 let contenidoNuevo = contenidoViejo
-                console.log(`Contenido Nuevo: ${contenidoNuevo}`)
-                console.log("Product ID = " + obj.id)
+                //console.log(`Contenido Nuevo: ${contenidoNuevo}`)
+                //console.log("Product ID = " + obj.id)
                 // Se guarda el File
                 return await fs.promises.writeFile('./'+ this.filename , JSON.stringify(contenidoNuevo, null, 2))
 
@@ -81,7 +72,7 @@ module.exports = class cartContenedor {
         try{
             let data = await fs.promises.readFile('./'+ this.filename)
             const contenidoParseado = JSON.parse(data);
-            let prodPorId = contenidoParseado.find(productos => productos.id == idNumber);
+            let prodPorId = contenidoParseado.find(productos => productos.cartID == idNumber);
             if(prodPorId != undefined){
                 console.log(prodPorId)
                 return prodPorId
@@ -109,17 +100,41 @@ module.exports = class cartContenedor {
         try{
             let data = await fs.promises.readFile('./'+ this.filename)
             const contParsed = JSON.parse(data);
-            let prodPorId = contParsed.find(productos => productos.id == idNumber);
+            let prodPorId = contParsed.find(a => a.cartID == idNumber);
             if(prodPorId != undefined){
-                let prodListIndex = contParsed.findIndex(productos => productos.id == idNumber)
+                let prodListIndex = contParsed.findIndex(a => a.cartID == idNumber)
                 contParsed.splice(prodListIndex,1)
-                console.log(contParsed) //Guardar el archivo
+                //console.log(contParsed) //Guardar el archivo
                 await fs.promises.writeFile('./'+ this.filename, JSON.stringify(contParsed, null, 2)) //ojo este await
             } else {
                 console.log("Product Not Found!")
             }
         } catch(err){
             console.log("ERROR at Delete by ID" + err)
+        }
+    }
+
+    async deleteProductById(idDelCart, productID){
+        try{
+            let data = await fs.promises.readFile('./'+ this.filename)
+            const contParsed = JSON.parse(data);
+            let cartPorId = contParsed.find(a => a.cartID == idDelCart); //Se encuentra el Cart
+            if(cartPorId != undefined){
+                let cartIndex = contParsed.findIndex(a = a.cartID == idDelCart)
+                //Encontrado el Cart index, hay que buscar el product
+                let prodPorId = contParsed.cartID[idDelCart].cartContent.find(a =>a.id == productID)
+                if(prodPorId != undefined){
+                    let prodListIndex = contParsed.cartID[idDelCart].cartContent.findIndex(a =>a.id == productID) //Se encuentra Prod
+                    contParsed.splice(prodListIndex,1)
+                    await fs.promises.writeFile('./'+ this.filename, JSON.stringify(contParsed, null, 2)) //ojo este await
+                } else {
+                    console.log("Producto No encontrado")
+                }
+                } else {
+                console.log("Cart Not Found!")
+            }
+        } catch(err){
+            console.log("ERROR at Delete P by ID" + err)
         }
     }
 

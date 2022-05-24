@@ -1,8 +1,11 @@
 const express = require("express")
-//const bodyParser = require('body-parser')
 const {Router} = express
 const contenedor = require('./main.js')
 const Newcontenedor = new contenedor('productos.json')
+
+const cartContenedor = require('./mainCart.js')
+const NewCart = new cartContenedor('carrito.json')
+
 const app = express()
 
 //APP
@@ -14,6 +17,9 @@ app.set('view engine', 'ejs')
 
 //Router
 const routerProductos = new Router()
+const routerCart = new Router()
+
+
 routerProductos.get('/', async(req, res)=>{
     productos = await Newcontenedor.getAll()
     res.render('inicio', {productos})
@@ -39,27 +45,41 @@ routerProductos.get('/productos/id', async(req, res)=>{
 routerProductos.delete('/productos/id', async(req, res)=>{
     let productId = req.query.id
     await Newcontenedor.deleteById(productId)
-    res.send(await Newcontenedor.getAll(productId))
+    res.send(await Newcontenedor.getAll())
 })
 
-/*
-routerProductos.get('/carrito', async(req, res)=>{
-    res.render('carrito', {productos})
+////////////CARRITO
+routerCart.get('/carrito', async(req,res)=>{
+    res.send(await NewCart.getAll())
 })
-routerProductos.get('/carrito', async(req, res)=>{
-    res.render('carrito', {productos})
+routerCart.post('/carrito', async(req,res)=>{
+    await NewCart.save(req.body)
+    res.send(await NewCart.getAll())
 })
-routerProductos.get('/carrito', async(req, res)=>{
-    res.render('carrito', {productos})
+routerCart.delete('/carrito/id', async(req,res)=>{
+    let carritoID = req.query.id
+    NewCart.deleteById(carritoID)
+    res.send(await NewCart.getAll())
 })
-routerProductos.get('/carrito', async(req, res)=>{
-    res.render('carrito', {productos})
-})*/
+routerCart.delete('/carrito/:id/productos/:id_prod', async(req,res)=>{
+    let carritoID = req.params.id
+    let productID = req.params.id_prod
+    console.log("carritoID"+ carritoID +"prodID"+productID)
+    NewCart.deleteProductById(carritoID, productID)
+    res.send(await NewCart.getAll())
+})
+routerCart.get('/carrito/:id/productos/:id_prod', async(req,res)=>{
+    let carritoID = req.params.id
+    let productID = req.params.id_prod
+    console.log("carritoID"+ carritoID +"prodID"+productID)
+    res.send(await NewCart.getAll())
+})
 
+///:id/productos/:id_prod
 
 // Carga de router
 app.use("/", routerProductos)
-app.use("/carrito", routerProductos)
+app.use("/", routerCart)
 
 
 //Levantar Server
@@ -79,8 +99,8 @@ El router base '/api/productos' implementará cuatro funcionalidades:
 ****DELETE: '/:id' - Borra un producto por su id (disponible para administradores)
 
 El router base '/api/carrito' implementará tres rutas disponibles para usuarios y administradores:
-POST: '/' - Crea un carrito y devuelve su id.
-DELETE: '/:id' - Vacía un carrito y lo elimina.
+****POST: '/' - Crea un carrito y devuelve su id.
+****DELETE: '/:id' - Vacía un carrito y lo elimina.
 GET: '/:id/productos' - Me permite listar todos los productos guardados en el carrito
 POST: '/:id/productos' - Para incorporar productos al carrito por su id de producto
 DELETE: '/:id/productos/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto
