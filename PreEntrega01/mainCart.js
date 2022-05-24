@@ -120,12 +120,12 @@ module.exports = class cartContenedor {
             const contParsed = JSON.parse(data);
             let cartPorId = contParsed.find(a => a.cartID == idDelCart); //Se encuentra el Cart
             if(cartPorId != undefined){
-                let cartIndex = contParsed.findIndex(a = a.cartID == idDelCart)
+                let cartIndex = contParsed.findIndex(a => a.cartID == idDelCart)
                 //Encontrado el Cart index, hay que buscar el product
-                let prodPorId = contParsed.cartID[idDelCart].cartContent.find(a =>a.id == productID)
-                if(prodPorId != undefined){
-                    let prodListIndex = contParsed.cartID[idDelCart].cartContent.findIndex(a =>a.id == productID) //Se encuentra Prod
-                    contParsed.splice(prodListIndex,1)
+                let cartProductPorId = contParsed[cartIndex].cartContent.find(a =>a.id == productID)
+                if(cartProductPorId != undefined){
+                    let cartContentIndex = contParsed[cartIndex].cartContent.findIndex(a =>a.id == productID);
+                    contParsed[cartIndex].cartContent.splice(cartContentIndex,1)
                     await fs.promises.writeFile('./'+ this.filename, JSON.stringify(contParsed, null, 2)) //ojo este await
                 } else {
                     console.log("Producto No encontrado")

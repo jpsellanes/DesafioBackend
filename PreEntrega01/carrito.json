@@ -1,59 +1,52 @@
 [
   {
     "cartID": 1,
-		"cartContent": [
-			{
-				"qty": 1,
-				"title": "Escuadra",
-				"price": 350,
-				"id": 1
-			},
-			{
-				"qty": 2,
-				"title": "calculadora",
-				"price": 1800,
-				"id": 2
-			},
-			{
-				"qty": 5,
-				"title": "calculadr",
-				"price": 100,
-				"id": 3
-			}
-		]
+    "cartContent": [
+      {
+        "qty": 1,
+        "title": "Escuadra",
+        "price": 350,
+        "id": 1
+      },
+      {
+        "qty": 2,
+        "title": "calculadora",
+        "price": 1800,
+        "id": 2
+      },
+      {
+        "qty": 5,
+        "title": "calculadr",
+        "price": 100,
+        "id": 3
+      }
+    ]
   },
   {
     "cartID": 2,
-		"cartContent": [
-			{
-				"qty": 1,
-				"title": "Escuadra",
-				"price": 350,
-				"id": 1
-			},
-			{
-				"qty": 2,
-				"title": "calculadora",
-				"price": 1800,
-				"id": 2
-			},
-			{
-				"qty": 5,
-				"title": "calculadr",
-				"price": 100,
-				"id": 3
-			}
-		]
+    "cartContent": [
+      {
+        "qty": 1,
+        "title": "Escuadra",
+        "price": 350,
+        "id": 1
+      },
+      {
+        "qty": 2,
+        "title": "calculadora",
+        "price": 1800,
+        "id": 2
+      },
+      {
+        "qty": 5,
+        "title": "calculadr",
+        "price": 100,
+        "id": 3
+      }
+    ]
   },
   {
     "cartID": 3,
-		"cartContent": [
-			{
-				"qty": 1,
-				"title": "Escuadra",
-				"price": 350,
-				"id": 1
-			}
-		]
+    "cartContent": []
   }
 ]
