@@ -32,18 +32,18 @@ routerProductos.post('/productos', async(req, res)=>{
 routerProductos.get('/productos', async(req, res)=>{
     res.render('productos', {productos})
 })
-routerProductos.put('/productos/id', async(req, res)=>{
-    let productId = req.query.id
+routerProductos.put('/productos/:id', async(req, res)=>{
+    let productId = req.params.id
     await Newcontenedor.updateById(productId, req.body)
     res.send(await Newcontenedor.getById(productId))
     //res.render('productos', {productos})
 })
-routerProductos.get('/productos/id', async(req, res)=>{
-    let productId = req.query.id
+routerProductos.get('/productos/:id', async(req, res)=>{
+    let productId = req.params.id
     res.send(await Newcontenedor.getById(productId))
 })
-routerProductos.delete('/productos/id', async(req, res)=>{
-    let productId = req.query.id
+routerProductos.delete('/productos/:id', async(req, res)=>{
+    let productId = req.params.id
     await Newcontenedor.deleteById(productId)
     res.send(await Newcontenedor.getAll())
 })
@@ -82,12 +82,9 @@ routerCart.post('/carrito/:id/productos/:prodID', async(req,res)=>{
     //res.send(await NewCart.getAll())
 })
 
-///:id/productos/:id_prod
-
 // Carga de router
 app.use("/", routerProductos)
 app.use("/", routerCart)
-
 
 //Levantar Server
 const PORT = 8080
@@ -95,8 +92,6 @@ const server = app.listen(PORT, ()=>{
     console.log(`servidor escuchando ${server.address().port}`)
 })
 server.on("error", error => console.log("error" + error))
-
-
 
 /*
 El router base '/api/productos' implementará cuatro funcionalidades:
@@ -109,6 +104,6 @@ El router base '/api/carrito' implementará tres rutas disponibles para usuarios
 ****POST: '/' - Crea un carrito y devuelve su id.
 ****DELETE: '/:id' - Vacía un carrito y lo elimina.
 ****GET: '/:id/productos' - Me permite listar todos los productos guardados en el carrito
-*-*-*-*POST: '/:id/productos' - Para incorporar productos al carrito por su id de producto
+****POST: '/:id/productos' - Para incorporar productos al carrito por su id de producto
 ****DELETE: '/:id/productos/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto
 */

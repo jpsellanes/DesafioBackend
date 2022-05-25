@@ -58,14 +58,10 @@ module.exports = class contenedor {
         try{
             let data = await fs.promises.readFile('./'+ this.filename)
             const contenidoParseado = JSON.parse(data);
-            console.log("la neuva dataes "+newData)
-            console.log("la nueva data typeofs" + typeof(newData))
             let prodIndex = contenidoParseado.findIndex(productos => productos.id == idNumber);
             if(prodIndex != undefined){
-                console.log("nueva data pa update " + newData + "el index sera " + prodIndex)
-                contenidoParseado[prodIndex].title = newData.productoTitle
-                contenidoParseado[prodIndex].price = newData.productoPrice
-                console.log("El producto actualizado se debe ver asi " + contenidoParseado[prodIndex])
+                contenidoParseado[prodIndex].title = newData.title
+                contenidoParseado[prodIndex].price = newData.price
                 return await fs.promises.writeFile('./'+ this.filename , JSON.stringify(contenidoParseado, null, 2))
             } else {
                 console.log("Product Not Found for Update!")
