@@ -71,18 +71,47 @@ module.exports = class cartContenedor {
     //Trae el item segun su ID unico
         try{
             let data = await fs.promises.readFile('./'+ this.filename)
-            const contenidoParseado = JSON.parse(data);
-            let prodPorId = contenidoParseado.find(productos => productos.cartID == idNumber);
-            if(prodPorId != undefined){
-                console.log(prodPorId)
-                return prodPorId
+            const contParsed = JSON.parse(data);
+            let cartIndexById = contParsed.findIndex(a => a.cartID == idNumber);
+            let cartByIndex = contParsed.find(a => a.cartID == idNumber);
+            if(cartByIndex != undefined){
+                return contParsed[cartIndexById].cartContent
             } else {
-                console.log("Product Not Found!")
+                console.log("Cart Not Found!")
                 return "Producto No Encontrado"
             }
         } catch(err){
             console.log("ERROR with GetById-> " + err)
         }
+    }
+    async postProductById(carritoID, prodID, prodToPush){
+        try{
+            let data = await fs.promises.readFile('./'+ this.filename)
+            const contParsed = JSON.parse(data);
+            let cartIndexById = Array.from(contParsed).findIndex(a=>a.cartID == carritoID)
+            let cartByIndex = Array.from(contParsed).find(a =>a.cartID == carritoID)
+            if(cartByIndex != undefined){
+                let prodIsHere = Array.from(contParsed[cartIndexById].cartContent).find(a=>a.id == prodID)
+                if(prodIsHere == undefined){
+                    //console.log(prodToPush + "is a " + typeof(prodToPush))
+                    let newContParse = contParsed[cartIndexById].cartContent.push(prodToPush)
+                    console.log("cparsed "+ JSON.stringify(contParsed[cartIndexById].cartContent))
+                    console.log("newContParse "+ newContParse)
+                    //console.log(contParsed[cartIndexById].cartContent)
+                    //return "rrrrr"
+                    return await fs.promises.writeFile('./'+ this.filename , JSON.stringify(contParsed[cartIndexById].cartContent, null, 2))
+                }else{
+                    console.log("Product Already on Cart do x")
+                    return "Product Already on Cart do x"
+                }
+            }else{
+                console.log("CartNoEncontrado")
+                return "CartNoEncontrado"
+            }
+        }catch(err){
+            console.log("Error at updateProductByID: " + err)
+        }
+        
     }
 
     async getAll(){

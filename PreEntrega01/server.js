@@ -68,11 +68,18 @@ routerCart.delete('/carrito/:id/productos/:id_prod', async(req,res)=>{
     NewCart.deleteProductById(carritoID, productID)
     res.send(await NewCart.getAll())
 })
-routerCart.get('/carrito/:id/productos/:id_prod', async(req,res)=>{
+
+routerCart.get('/carrito/:id/productos', async(req,res)=>{
     let carritoID = req.params.id
-    let productID = req.params.id_prod
-    console.log("carritoID"+ carritoID +"prodID"+productID)
-    res.send(await NewCart.getAll())
+    res.send(await NewCart.getById(carritoID))
+})
+routerCart.post('/carrito/:id/productos/:prodID', async(req,res)=>{
+    let carritoID = req.params.id
+    let prodID = req.params.prodID
+    prodToPush = await Newcontenedor.getById(prodID)
+    console.log("prodToPush"+JSON.stringify(prodToPush))
+    res.send(await NewCart.postProductById(carritoID, prodID, prodToPush))
+    //res.send(await NewCart.getAll())
 })
 
 ///:id/productos/:id_prod
@@ -101,7 +108,7 @@ El router base '/api/productos' implementará cuatro funcionalidades:
 El router base '/api/carrito' implementará tres rutas disponibles para usuarios y administradores:
 ****POST: '/' - Crea un carrito y devuelve su id.
 ****DELETE: '/:id' - Vacía un carrito y lo elimina.
-GET: '/:id/productos' - Me permite listar todos los productos guardados en el carrito
+****GET: '/:id/productos' - Me permite listar todos los productos guardados en el carrito
 POST: '/:id/productos' - Para incorporar productos al carrito por su id de producto
 ****DELETE: '/:id/productos/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto
 */
