@@ -29,6 +29,10 @@ module.exports = class cartContenedor {
                 if(maxID >= obj.cartID){
                     obj.cartID = maxID + 1;
                 }
+                const today = new Date()
+                let todayTime = today.getFullYear() +"-"+ today.getMonth() +"-"+ today.getDate() +"-"+ today.getHours()+"-"+today.getMinutes()+"-"+today.getSeconds()
+                //console.log(JSON.stringify(todayTime))
+                obj.cartTime = todayTime 
                 contenidoViejo.push( obj )
                 let contenidoNuevo = contenidoViejo
                 //console.log(`Contenido Nuevo: ${contenidoNuevo}`)
@@ -160,6 +164,15 @@ module.exports = class cartContenedor {
             }
         } catch(err){
             console.log("ERROR at Delete P by ID" + err)
+        }
+    }
+    async nuevaHora(){
+        try{
+            const today = new Date()
+            let todayTime = today.getFullYear() +"-"+ today.getMonth() +"-"+ today.getDate() +"-"+ today.getHours()+"-"+today.getMinutes()+"-"+today.getSeconds()
+        return todayTime
+        }catch(err){
+            console.log("Problema con nuevaHora"+ err)
         }
     }
 
