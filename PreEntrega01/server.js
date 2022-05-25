@@ -8,6 +8,9 @@ const NewCart = new cartContenedor('carrito.json')
 
 const app = express()
 
+//Login
+const loggedAsAdmin = true;
+
 //APP
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
@@ -25,27 +28,43 @@ routerProductos.get('/', async(req, res)=>{
     res.render('inicio', {productos})
 })
 routerProductos.post('/productos', async(req, res)=>{
-    await Newcontenedor.save(req.body)
-    productos.push(req.body)
-    res.redirect('/')
+    if(loggedAsAdmin == true){
+        await Newcontenedor.save(req.body)
+        productos.push(req.body)
+        res.redirect('/')
+    }else{
+        res.status(401).send('No Autorizado')
+    }
+    if(loggedAsAdmin == true){
+    }else{
+        res.status(401).send('No Autorizado')
+    }
 })
 routerProductos.get('/productos', async(req, res)=>{
     res.render('productos', {productos})
 })
 routerProductos.put('/productos/:id', async(req, res)=>{
-    let productId = req.params.id
-    await Newcontenedor.updateById(productId, req.body)
-    res.send(await Newcontenedor.getById(productId))
-    //res.render('productos', {productos})
+    if(loggedAsAdmin == true){
+        let productId = req.params.id
+        await Newcontenedor.updateById(productId, req.body)
+        res.send(await Newcontenedor.getById(productId))
+    }else{
+        res.status(401).send('No Autorizado')
+    }
 })
 routerProductos.get('/productos/:id', async(req, res)=>{
     let productId = req.params.id
     res.send(await Newcontenedor.getById(productId))
 })
 routerProductos.delete('/productos/:id', async(req, res)=>{
-    let productId = req.params.id
-    await Newcontenedor.deleteById(productId)
-    res.send(await Newcontenedor.getAll())
+    if(loggedAsAdmin == true){
+        let productId = req.params.id
+        await Newcontenedor.deleteById(productId)
+        res.send(await Newcontenedor.getAll())
+    }else{
+        res.status(401).send('No Autorizado')
+    }
+    
 })
 
 ////////////CARRITO
