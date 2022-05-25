@@ -93,13 +93,9 @@ module.exports = class cartContenedor {
             if(cartByIndex != undefined){
                 let prodIsHere = Array.from(contParsed[cartIndexById].cartContent).find(a=>a.id == prodID)
                 if(prodIsHere == undefined){
-                    //console.log(prodToPush + "is a " + typeof(prodToPush))
                     let newContParse = contParsed[cartIndexById].cartContent.push(prodToPush)
-                    console.log("cparsed "+ JSON.stringify(contParsed[cartIndexById].cartContent))
-                    console.log("newContParse "+ newContParse)
-                    //console.log(contParsed[cartIndexById].cartContent)
-                    //return "rrrrr"
-                    return await fs.promises.writeFile('./'+ this.filename , JSON.stringify(contParsed[cartIndexById].cartContent, null, 2))
+                    await fs.promises.writeFile('./'+ this.filename , JSON.stringify(contParsed, null, 2))
+                    return contParsed
                 }else{
                     console.log("Product Already on Cart do x")
                     return "Product Already on Cart do x"
