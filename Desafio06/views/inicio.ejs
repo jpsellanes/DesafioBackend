@@ -27,41 +27,7 @@
         <div id="messages"></div>
     </div>
     
-    <script>
-        const socket = io.connect()
-        function nuevaHora(){
-            const today = new Date()
-            let todayTime = today.getFullYear() +"-"+ today.getMonth() +"-"+ today.getDate() +"-"+ today.getHours()+"-"+today.getMinutes()+"-"+today.getSeconds()
-            return todayTime
-        }
-        horaDelMensaje="";
-        function addMessage(e){
-            horaDelMensaje = nuevaHora()
-            const message = {
-                author: document.getElementById('username').value,
-                message: document.getElementById('text').value, 
-                horaMensaje: nuevaHora()
-            }
-            socket.emit("new-message", message);
-            return false
-        }
-        //Recibir
-        function render(data){
-            const html = data.map((elem, index)=>{
-                return(`
-                <div>
-                    <strong style="color:blue">${elem.author}</strong>>
-                    <p style="color:brown">${elem.horaMensaje}</p>
-                    <p style="font-style:italic; color:green">${elem.message}</p>
-                    <hr>
-                </div>`)
-            }).join(" ")
-            console.log(nuevaHora())
-            document.getElementById("messages").innerHTML = html
-        }
-
-        socket.on("messages", function(data){ render(data)})
-    </script>
+    <script src="/main.js"></script>
 </body>
 
 </html>

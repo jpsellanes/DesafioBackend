@@ -62,33 +62,21 @@
     "id": 12
   },
   {
-    "title": "PegamentoLaGotita",
-    "price": "750",
+    "title": "",
+    "price": "",
     "thumbnail": "",
     "id": 13
   },
   {
-    "title": "SuperPegamentoWurth",
-    "price": "1250",
-    "thumbnail": "",
+    "title": "566657",
+    "price": "657567",
+    "thumbnail": "567657",
     "id": 14
   },
   {
-    "title": "11111111",
-    "price": "55555",
-    "thumbnail": "",
+    "title": "345345345",
+    "price": "3333",
+    "thumbnail": "2342",
     "id": 15
-  },
-  {
-    "title": "probandoLoop",
-    "price": "1234",
-    "thumbnail": "",
-    "id": 16
-  },
-  {
-    "title": "probandoLoop2",
-    "price": "",
-    "thumbnail": "",
-    "id": 17
   }
 ]
