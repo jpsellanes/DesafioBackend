@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi plantilla de Ingreso de Datos en EJS</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    </head>
+
+<body>
+    <div class="container mt-3">
+        <div class="jumbotron">
+            <%- include('./formulario')-%>
+            <%- include('./historialSocket')-%>
+        </div>
+        <h1>CHAT</h1>
+        <div>
+            <form onsubmit="return addMessage(this)">
+                <input type="text" id="username" placeholder="Tu nombre">
+                <input type="text" id="text" placeholder="Cuentanos algo...">
+                <input type="submit" value="Enviar"></input>
+            </form>
+        </div>>
+        <div id="messages"></div>
+    </div>
+    
+    <script src="/main.js"></script>
+</body>
+
+</html>

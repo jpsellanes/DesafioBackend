@@ -1,0 +1,24 @@
+<h1 style="color:blue;">Ingrese datos</h1>
+<br>
+
+<form onsubmit="return addProduct(this)" >
+
+    <div class="form-group">
+        <label for="title"><b>Title</b></label>
+        <input id="title" class="form-control" type="text" name="title">
+    </div>
+
+    <div class="form-group">
+        <label for="price"><b>Price</b></label>
+        <input id="price" class="form-control" type="number" name="price">
+    </div>
+
+    <div class="form-group">
+        <label for="thumbnail"><b>Thumbnail</b></label>
+        <input id="thumbnail" class="form-control" type="text" name="thumbnail">
+    </div>
+
+    <button id="botonEnviarForm01" class="btn btn-success mt-3 mb-5">Enviar</button>
+</form>
+    <button onclick="location.href='/productos'" class="btn btn-info mt-3 mb-5">Ver Todos los productos</button>
+
