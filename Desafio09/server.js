@@ -9,7 +9,8 @@ const ClienteDB = require ('./dbmain.js')
 const ClienteSQL = require ('./sqlmain.js')
 ///Imports para este Desafio
 const {generarMensaje, generarProducto} = require("./util/mock.js")
-const {normMensajes, print} = require("./util/normalizar.js")
+const {normMensajes, desnormMensajes, print} = require("./util/normalizar.js")
+const {mensajesparausar}= require("./mensajesnor.js")
 
 const db = new ClienteDB(optionsDB)
 const sql = new ClienteSQL(optionsSQL)
@@ -41,13 +42,14 @@ app.get('/productos-test', (req, res)=>{
     res.json(generarProducto(5))
 })
 app.get('/mensajes-test', (req,res)=>{
-    const mensajes = generarMensaje(5)
+    const mensajes = mensajesparausar
     //Mensaje Normalizado
     res.json(normMensajes(mensajes))
     //Mensaje no normalizado
-    console.log(mensajes)
+    console.log(mensajesparausar)
     console.log("Longitud del Objeto Original: " + JSON.stringify(mensajes).length)
     console.log("Longitud normalizada es: " + JSON.stringify(normMensajes(mensajes)).length)
+    console.log("La longitud desnormalizada es: " + JSON.stringify(desnormMensajes(mensajes)).length)
 })
 
 routerProductos.get('/productos', async function(req, res){

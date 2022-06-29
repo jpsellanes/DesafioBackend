@@ -19,12 +19,11 @@ function generarMensaje ( cantidad){
     let mensajes = []
     for (let i=0; i< cantidad; i++){
         let mensaje = {
-            author:{
-                name: faker.name.firstName(),
-                lastname: faker.name.lastName(),
-                pfp: faker.image.avatar(),
-                pDescription: faker.lorem.sentence(),
-            },
+            id:faker.random.numeric(1),
+            name: faker.name.firstName(),
+            lastname: faker.name.lastName(),
+            pfp: faker.image.avatar(),
+            pDescription: faker.lorem.sentence(),
             messageText: faker.lorem.sentence(),
         }
         mensajes.push(mensaje)
@@ -32,4 +31,5 @@ function generarMensaje ( cantidad){
     return mensajes
 }
 
+console.log(generarMensaje(5))
 module.exports={ generarMensaje, generarProducto}
