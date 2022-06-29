@@ -1,0 +1,94 @@
+[
+  {
+    "title": "Escuadra",
+    "price": 350,
+    "id": 1
+  },
+  {
+    "title": "calculadora",
+    "price": 1800,
+    "id": 2
+  },
+  {
+    "title": "globo_terraqueo",
+    "price": 2550,
+    "id": 3
+  },
+  {
+    "title": "lapicera",
+    "price": 250,
+    "id": 4
+  },
+  {
+    "title": "lapicera2",
+    "price": 220,
+    "id": 5
+  },
+  {
+    "title": "lapicera4",
+    "price": 220,
+    "id": 6
+  },
+  {
+    "title": "biromeX",
+    "price": 175,
+    "id": 7
+  },
+  {
+    "title": "tttasdasdas",
+    "price": 175,
+    "id": 8
+  },
+  {
+    "title": "ettettt",
+    "price": "55",
+    "id": 9
+  },
+  {
+    "title": "NuevoPro",
+    "price": "420",
+    "id": 10
+  },
+  {
+    "title": "Lapicera20",
+    "price": "50",
+    "thumbnail": "imagenPNG",
+    "id": 11
+  },
+  {
+    "title": "ReglaMapedV02",
+    "price": "300",
+    "thumbnail": "",
+    "id": 12
+  },
+  {
+    "title": "",
+    "price": "",
+    "thumbnail": "",
+    "id": 13
+  },
+  {
+    "title": "566657",
+    "price": "657567",
+    "thumbnail": "567657",
+    "id": 14
+  },
+  {
+    "title": "345345345",
+    "price": "3333",
+    "thumbnail": "2342",
+    "id": 15
+  },
+  {
+    "title": "44445hhg",
+    "price": "555",
+    "thumbnail": "333",
+    "id": 16
+  },
+  {
+    "title": "NuevoProducto",
+    "price": "75",
+    "thumbnail": "abcdft",
+    "id": 17
+  }
+]
