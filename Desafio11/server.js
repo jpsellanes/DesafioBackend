@@ -11,13 +11,16 @@ const contenedor = require('./main.js')
 const Newcontenedor = new contenedor('productos.json')
 const app = express()
 const advancedOptions = {useNewUrlParser: true, useUnifiedTopology: true}
-//const userContenedor = require('./utils/contenedorUsers')
-//const newUserContenedor = new userContenedor
+const userContenedor = require('./utils/contenedorUsers')
+const newUserContenedor = new userContenedor
+
+
 ////PassPort
-const usuarios = []//newUserContenedor.getUser()
+const usuarios = [] //newUserContenedor.getUser()
 
 passport.use('register', new LocalStrategy({
     passReqToCallback: true}, (req, username, password, done)=>{
+        //const usuarios = newUserContenedor.getUser()
         const usuario = usuarios.find(usuario => usuario.username == username)
         if(usuario){
             return done('Usuario ya registrado')
@@ -34,6 +37,7 @@ passport.use('register', new LocalStrategy({
 // Passport Login
 
 passport.use('login', new LocalStrategy((username, password, done)=>{
+    //const usuarios = newUserContenedor.getUser()
     const user = usuarios.find(usuario => usuario.username == username)
     if(!user){
         return done(null, false)
