@@ -16,13 +16,17 @@ const newUserContenedor = new userContenedor
 
 
 ////PassPort
-const usuarios = [] //newUserContenedor.getUser()
+const usuarios = newUserContenedor.getUser()
 
 passport.use('register', new LocalStrategy({
-    passReqToCallback: true}, (req, username, password, done)=>{
-        //const usuarios = newUserContenedor.getUser()
-        const usuario = usuarios.find(usuario => usuario.username == username)
-        if(usuario){
+    passReqToCallback: true}, async(req, username, password, done)=>{
+        const usuarios = await newUserContenedor.getUser()
+        console.log(usuarios + " es del tipo ")
+        console.log(typeof(usuarios))
+        const usuario = usuarios.filter(usuario => {return usuario.username == username})
+        console.log(usuario)
+        //const usuario = usuarios.find(usuario => usuario.username == username)
+        if(usuario.length != 0){
             return done('Usuario ya registrado')
         }
         const user = {
@@ -30,19 +34,23 @@ passport.use('register', new LocalStrategy({
             password,
         }
         usuarios.push(user)
+        newUserContenedor.saveUser(user)
         return done(null, user)
     }
     ))
 //----------------
 // Passport Login
 
-passport.use('login', new LocalStrategy((username, password, done)=>{
-    //const usuarios = newUserContenedor.getUser()
-    const user = usuarios.find(usuario => usuario.username == username)
+passport.use('login', new LocalStrategy(async(username, password, done)=>{
+    const usuarios = await newUserContenedor.getUser()
+    const user = usuarios.filter(usuario => {return usuario.username == username})
+    ///console.log(user[0].password)
     if(!user){
+        console.log("User Not Found")
         return done(null, false)
     }
-    if(user.password != password){
+    if(user[0].password != password){
+        console.log("Wrong Password")
         return done(null, false)
     }
     return done(null, user)
@@ -50,10 +58,11 @@ passport.use('login', new LocalStrategy((username, password, done)=>{
 
 //Serializar, y deserializar
 passport.serializeUser(function(user, done){
-    done(null, user.username)
+    done(null, user[0].username)
 })
-passport.deserializeUser(function(username, done){
-    const usuario = usuarios.find(usuario => usuario.username == username)
+passport.deserializeUser(async function(username, done){
+    const usuarios = await newUserContenedor.getUser()
+    const usuario = usuarios.filter(usuario => usuario.username == username)
     done(null, usuario)
 })
 
