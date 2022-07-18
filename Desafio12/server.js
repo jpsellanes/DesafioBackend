@@ -194,7 +194,7 @@ routerProductos.get('/randoms', (req, res)=>{
     const computo = fork(path.resolve(process.cwd(), 'computo.js'))
     computo.on('message', resultado =>{
         if(resultado === 'listo'){
-            computo.send('start')
+            //computo.send('start')
             computo.send(numToCalc)
         } else {
             res.json({resultado})
