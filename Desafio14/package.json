@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "artillery": "^2.0.0-22",
+    "autocannon": "^7.9.0",
+    "body-parser": "^1.20.0",
+    "cluster": "^0.7.7",
+    "compression": "^1.7.4",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "minimist": "^1.2.6",
+    "mongoose": "^6.4.4",
+    "node": "^17.7.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "stream": "^0.0.2",
+    "winston": "^3.8.1",
+    "yargs": "^17.5.1"
+  },
+  "scripts": {
+    "test": "node bench.js",
+    "start": "0x server.js"
+  },
+  "name": "desafio12",
+  "version": "1.0.0",
+  "main": "main.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
