@@ -188,6 +188,15 @@ routerProductos.get('/wsp', async(req, res)=>{
       .done();
 })
 
+routerProductos.get('/mail', async(req, res)=>{
+    await transporter.sendMail({
+        from: 'charlene29@ethereal.email',
+        to:'sellanes_juan_pablo@hotmail.com',
+        subject:'New User Registered',
+        text: "Este es un mail de prueba",
+    })
+})
+
 ///Registro
 app.get('/register', (req, res)=>{
     res.render("register")
